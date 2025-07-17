@@ -26,12 +26,12 @@ class DebitCardControllerTest extends TestCase
     {
         // get /debit-cards
 
-        // Create debit cards for the user
         $debitCardOne = DebitCard::factory()->create([
             'user_id' => $this->user->id,
             'number' => 1234567890123456,
             'type' => 'Visa',
         ]);
+
         $debitCardTwo = DebitCard::factory()->create([
             'user_id' => $this->user->id,
             'number' => 6543210987654321,
@@ -39,7 +39,7 @@ class DebitCardControllerTest extends TestCase
         ]);
 
         // Make a GET request to the debit cards endpoint
-        $response = $this->get('/api/debit-cards');
+        $response = $this->getJson('/api/debit-cards');
 
         // Assert the response is OK and contains only the authenticated user's debit cards
         $response->assertStatus(200)
@@ -239,7 +239,7 @@ class DebitCardControllerTest extends TestCase
             'currency_code' => DebitCardTransaction::CURRENCY_VND,
         ]);
 
-        $transactionOne = DebitCardTransaction::factory()->create([
+        $transactionTwo = DebitCardTransaction::factory()->create([
             'debit_card_id' => $debitCard->id,
             'amount' => 450,
             'currency_code' => DebitCardTransaction::CURRENCY_VND,
@@ -252,27 +252,4 @@ class DebitCardControllerTest extends TestCase
 
     // Extra bonus for extra tests :)
 
-    // public function testCustomerCanViewTransactionsOnADebitCard() {
-    //     // debit-card-transactions
-    // }
-
-    // public function testCustomerCannotViewTransactionsWithWrongValidation() {
-    //     // debit-card-transactions
-    // }
-
-    // public function testCustomerCanCreateATransaction() {
-    //     // debit-card-transactions
-    // }
-
-    // public function testCustomerCannotCreateATransactionWithWrongValidation() {
-    //     // debit-card-transactions
-    // }
-
-    // public function testCustomerCanViewASingleTransaction() {
-    //     // debit-card-transactions/{debitCardTransaction}
-    // }
-
-    // public function testCustomerCannotViewASingleTransactionWithWrongValidation() {
-    //     // debit-card-transactions/{debitCardTransaction}
-    // }
 }
